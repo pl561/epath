@@ -263,3 +263,12 @@ class EPath:
     def __str__(self):
         return "{}".format(self.path_str)
     __repr__ = __str__
+
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    sys.exit(main())
