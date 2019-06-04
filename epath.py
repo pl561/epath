@@ -9,13 +9,22 @@ EPath is the main class and proposes lots of features.
 
 In practice, it is possible to never manipulate the path string ever again. From the first line of codes to a highly developped project, this module gives an easier and more convenient time for programming. Bugs are also reduced : at least once, everyone has mistyped a path
 
+example:
+    import cv2
+    from epath import EPath
+    path = EPath("image.png")
+    image = path.imread()
+    blured_image = cv2.blur(image, (5, 5)
+    new_path = path.add_after_stem("_filtered")
+    new_path.imwrite(blured_image) 
+
 
 # how functions globally work : 
-example file path : /a/b/dir/image.jpg.png
-basename          : image.jpg.png
-stem              : image
-parent            : /a/b/dir
-suffix            : .png 
+    example file path : /a/b/dir/image.jpg.png
+    basename          : image.jpg.png
+    stem              : image
+    parent            : /a/b/dir
+    suffix            : .png 
 """
 
 
@@ -54,14 +63,20 @@ def add_after_stem(path_obj, ssuffix):
 
 
 class EPath:
-    """Enhanced Path class with custom features
-    default behavior of functions : return str objects
+    """Enhanced Path class with several useful features
+    behavior : uses functions, not attributes and returns EPath objects
+
     odd case : -- import pathtools as pt
                -- ep = pt.EPath("/tmp/ttt/file.a.b.c")
                -- ep.add_after_stem("extra_param_")
                >> '/tmp/ttt/file.a.bextra_param_.c'
-    does not support urls yet"""
+
+    todo : support urls, eg : download and manipulate image dataset"""
     def __init__(self, obj):
+        """init function can take different objects such as :
+           - str obj
+           - pathlib.Path obj
+           - EPath obj itself"""
         if isinstance(obj, str):
             if obj.endswith('/'):
                 self.path_str = obj[:-1]
