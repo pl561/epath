@@ -9,7 +9,7 @@ EPath is the main class and proposes lots of features.
 
 In practice, it is possible to never manipulate the path string ever again. From the first line of codes to a highly developped project, this module gives an easier and more convenient time for programming. Bugs are also reduced : at least once, everyone has mistyped a path
 
-example:
+# simple example:
     import cv2
     from epath import EPath
     path = EPath("image.png")
@@ -25,6 +25,12 @@ example:
     stem              : image
     parent            : /a/b/dir
     suffix            : .png 
+    
+In general, some functions do not really require documentation 
+since their names are self explainatory.
+    
+# future features :
+   support urls to manipulate downloadable files, images, etc
 """
 
 
@@ -71,7 +77,7 @@ class EPath:
                -- ep.add_after_stem("extra_param_")
                >> '/tmp/ttt/file.a.bextra_param_.c'
 
-    todo : support urls, eg : download and manipulate image dataset"""
+    """
     def __init__(self, obj):
         """init function can take different objects such as :
            - str obj
@@ -151,11 +157,18 @@ class EPath:
         self.path_obj.touch()
 
     def removefile(self):
-        if not self.is_file() and self.exists():
-            raise ValueError("This is not a file !")
-        else:
+        if self.is_file():
             if self.exists():
                 return os.remove(self.path_str)
+        else:
+            raise ValueError("This is not a file !")
+
+    def removedir(self):
+        if self.is_dir():
+            if self.exists():
+                return os.rmdir(self.path_str)
+        else:
+            raise ValueError("This is not a directory !")
 
     def string(self):
         return self.__str__()
