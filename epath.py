@@ -4,8 +4,18 @@
 __author__ = "Pascal Lefevre"
 __email__ = "plefevre561@gmail.com"
 
-"""This Python 2 module contains tools for manipulating Linux paths.
-EPath is the main class and proposes lots features.
+"""This module contains tools for manipulating Linux paths.
+EPath is the main class and proposes lots of features.
+
+In practice, it is possible to never manipulate the path string ever again. From the first line of codes to a highly developped project, this module gives an easier and more convenient time for programming. Bugs are also reduced : at least once, everyone has mistyped a path
+
+
+# how functions globally work : 
+example file path : /a/b/dir/image.jpg.png
+basename          : image.jpg.png
+stem              : image
+parent            : /a/b/dir
+suffix            : .png 
 """
 
 
@@ -14,14 +24,16 @@ import os
 from shutil import copyfile
 import pathlib
 import cv2
-import image
+# import image
 
 def replace_dir(path_obj, newdir):
+    """modify a pathlib.Path object parent"""
     name = os.path.join(newdir, path_obj.name)
     return name
 
 def replace_suffix(path_obj, suffix):
-    """replaces last suffix of path"""
+    """replaces last suffix of path
+    eg : image.jpg.png --> image.jpg.newsuffix"""
     if suffix.startswith('.'):
         basename = "".join([path_obj.stem, suffix])
     else:
@@ -64,7 +76,6 @@ class EPath:
             self.path_str = obj.path_str
         else:
             raise ValueError("not a str, not a pathlib.Path obj, "
-                             "not a WPath, "
                              "not a EPath !")
 
     def parent(self):
@@ -216,8 +227,8 @@ class EPath:
         return EPath(items[item])
 
 
-    def imread_gs_int(self, **kwds):
-        return image.imread_gs_int(self.path_str, **kwds)
+    def imread(self, **kwds):
+        return cv2.imread(self.path_str, **kwds)
 
     def imwrite(self, img):
         r = cv2.imwrite(self.path_str, img)
