@@ -112,7 +112,7 @@ class EPath:
            - pathlib.Path obj
            - EPath obj"""
         if isinstance(obj, str):
-            if obj.endswith('/'):
+            if obj.endswith('/') and len(obj) > 1:
                 self.path_str = obj[:-1]
             else:
                 self.path_str = obj
@@ -128,7 +128,18 @@ class EPath:
                              "not a EPath !")
 
     def parent(self):
-        """:returns the current path parent"""
+        """
+        :attr:   path_str
+        :return: parent path
+        :rtype:  EPath
+
+        :Example:
+        >>> path = Epath("/dirA/dirB/myfile.ext")
+        >>> path.parent()
+        /dirA/dirB
+        >>> path.parent().parent()
+        /dirA
+        """
         return EPath(str(self.path_obj.parent))
 
     def stem(self):
