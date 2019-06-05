@@ -100,45 +100,57 @@ class EPath:
                              "not a EPath !")
 
     def parent(self):
+        """:returns the current path parent"""
         return EPath(str(self.path_obj.parent))
 
     def stem(self):
+        """:returns the current path stem (basename without extension)"""
         return EPath(self.path_obj.stem)
 
     def stem_noparam(self):
+        """:returns the current path stem without stem suffix"""
         return EPath(self.stem().string().split('_')[0])
 
     def basename(self):
+        """:returns the base file name of the current path"""
         return EPath(self.path_obj.name)
 
     def suffix(self):
+        """:returns the suffix (or file extention)"""
         return EPath(self.path_obj.suffix)
 
     def has_suffix(self):
+        """tests for suffix (or extension) existence"""
         if len(self.path_obj.suffix) == 0:
             return False
         else:
             return True
 
     def add_suffix(self, suffix):
+        """:returns a new EPath obj with a new suffix to the current path"""
         if suffix.startswith("."):
             suffix = suffix[1:]
         p = ".".join([self.path_str, suffix])
         return EPath(p)
 
     def exists(self):
+        """tests if path exists on the hdd"""
         return self.path_obj.exists()
 
     def is_dir(self):
+        """tests if path is a directory"""
         return self.path_obj.is_dir()
 
     def is_file(self):
+        """tests if path is a file"""
         return self.path_obj.is_file()
 
     def is_readable(self):
+        """tests for read access"""
         return os.access(self.path_str, os.R_OK)
 
     def is_writable(self):
+        """test for write access"""
         return os.access(self.path_str, os.W_OK)
 
     def is_executable(self):
@@ -153,10 +165,12 @@ class EPath:
                 self.path_obj.mkdir()
 
     def touch(self):
-        """creates the file but does not erase its content if it exists"""
+        """creates a file at the current path but does
+        not erase its content if it exists"""
         self.path_obj.touch()
 
     def removefile(self):
+        """removes the file at the current path"""
         if self.is_file():
             if self.exists():
                 return os.remove(self.path_str)
@@ -164,6 +178,7 @@ class EPath:
             raise ValueError("This is not a file !")
 
     def removedir(self):
+        """removes the directory at the current path"""
         if self.is_dir():
             if self.exists():
                 return os.rmdir(self.path_str)
@@ -227,6 +242,8 @@ class EPath:
 
 
     def join(self, extrapath, obj=True):
+        """receive a path and append it to the current path
+        work similarly as the os.join function"""
         if isinstance(extrapath, list) or isinstance(extrapath, tuple):
             r = os.path.join(self.path_str, *extrapath)
         else:
@@ -241,10 +258,13 @@ class EPath:
         r = self.path_str + extrasuffix
         return EPath(r)
 
-    def __truediv__(self, extrapath):
+    def __div__(self, extrapath):
         """simulates / like linux paths but in Python code
            returns an EPath object"""
-        return self.join(extrapath)
+        print(extrapath)
+        return self.join(EPath(extrapath))
+    __floordiv__ = __truediv__= __div__
+
 
     def __getitem__(self, item):
         """parents and basename access in a list
@@ -256,27 +276,30 @@ class EPath:
 
 
     def imread(self, **kwds):
+        """reads an image using OpenCV"""
         return cv2.imread(self.path_str, **kwds)
 
     def imwrite(self, img):
+        """write an image (numpy array) using OpenCV"""
         r = cv2.imwrite(self.path_str, img)
         msg = "Could not write img at {}".format(self.path_str)
         assert self.exists(), msg
 
-    def write(self, content, binary=""):
-        mode = "w{}".format(binary)
+    def write(self, content, mode=""):
+        """write content to the current path"""
         with open(self.path_str, mode=mode) as fd:
             fd.write(content)
 
-    def write_csv(self, csv_content):
-        if self.has_suffix():
-            fname = self.replace_suffix(".csv").string()
-        else:
-            fname = self.add_suffix(".csv").string()
-        with open(fname, mode="w") as fd:
-            fd.write(csv_content)
+    # def write_csv(self, csv_content):
+    #     if self.has_suffix():
+    #         fname = self.replace_suffix(".csv").string()
+    #     else:
+    #         fname = self.add_suffix(".csv").string()
+    #     with open(fname, mode="w") as fd:
+    #         fd.write(csv_content)
 
     def writedf_tocsv(self, df, sep=";"):
+        """receives a pandas.DataFrame object and saves its csv version"""
         if self.has_suffix():
             fname = self.replace_suffix(".csv").string()
         else:
@@ -284,6 +307,8 @@ class EPath:
         df.to_csv(fname, sep=sep)
 
     def write_tex(self, tex_content, mode="w"):
+        """receives a latex string content and modify or add the .tex suffix
+        and saves it at the Epath instance location"""
         if self.has_suffix():
             fname = self.replace_suffix(".tex").string()
         else:
@@ -292,8 +317,9 @@ class EPath:
             fd.write(tex_content)
 
     def copyto(self, dir):
+        """copy the file at current path to a new directory dir"""
         if EPath(dir).is_dir():
-            copyfile(self.path_str, self.replace_parents(dir).string())
+            copyfile(self.string(), self.replace_parents(dir).string())
         else:
             raise ValueError("cannot copy, not a dir")
 
