@@ -1,4 +1,4 @@
-# A enhanced path module to improve efficiency when doing benchmarks
+# A enhanced path module to improve workflow efficiency and avoid bugs when coding benchmarks
 
 # Required modules from pip
 * pathlib
