@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 # -*-coding:utf-8 -*
 
-
+from __future__ import print_function
 import sys
 import os
+HOME = os.environ["HOME"]
 import numpy as np
 import pandas as pd
 from epath import EPath
@@ -16,9 +17,9 @@ def demo():
     image_fname2 = image_fname.replace_suffix(".png22")
     # change dir
     image_fname3 = image_fname2.replace_parents("/someotherdir/a/b")
-    print(image_fname)
-    print(image_fname2)
-    print(image_fname3)
+    # print(image_fname)
+    # print(image_fname2)
+    # print(image_fname3)
 
 
     home = EPath("/tmp")
@@ -31,23 +32,34 @@ def demo():
     df = pd.DataFrame()
     df["count"] = np.arange(10)
 
-    fname.writedf_tocsv(df)
+    # fname.writedf_tocsv(df)
 
     # file name is
-    print(fname)
-    # stem is
-    print(fname.stem())
-    print(fname.suffix())
-    print(fname.basename())
+    # print(fname)
+    # # stem is
+    # print(fname.stem())
+    # print(fname.suffix())
+    # print(fname.basename())
 
     # add data after stem
     fname2 = fname.add_after_stem("01010jlkjlkj_LKlKlkj")
     df["count2"] = np.arange(10, 20)
-    fname2.writedf_tocsv(df)
+    # fname2.writedf_tocsv(df)
+    # fname2.write_tex(df.to_latex())
 
-    fname2.write_tex(df.to_latex())
+    image_fname = EPath(HOME).join("Images/lena.png")
+    image = image_fname.imread()
 
+    npath = image_fname/"ff"/"jlkj"
 
+    print("New path : ", npath)
+    def brackets(s):
+        return "[{}]".format(s)
+
+    print(npath[0])
+    print(npath[1])
+    print(npath[2])
+    print(npath[3])
 
 
 def main():
