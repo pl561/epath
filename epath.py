@@ -7,7 +7,12 @@ __email__ = "plefevre561@gmail.com"
 """This module contains tools for manipulating Linux paths.
 EPath is the main class and proposes lots of features.
 
-In practice, it is possible to never manipulate the path string ever again. From the first line of codes to a highly developped project, this module gives an easier and more convenient time for programming. Bugs are also reduced : at least once, everyone has mistyped a path
+In practice, it is possible to never manipulate the path string ever again. 
+From the first line of codes to a highly developped project, this module 
+gives an easier and more convenient time for programming. 
+
+The number of bugs is also greatly reduced : at least once in his life, 
+everyone has mistyped a file path 
 
 # simple example:
     import cv2
@@ -20,11 +25,12 @@ In practice, it is possible to never manipulate the path string ever again. From
 
 
 # how functions globally work : 
-    example file path : /a/b/dir/image.jpg.png
-    basename          : image.jpg.png
-    stem              : image
-    parent            : /a/b/dir
-    suffix            : .png 
+    example file path  : /a/b/dir/image.jpg.png
+    basename()         : image.jpg.png
+    stem()             : image.jpg
+    stem().stem()
+    parent()           : /a/b/dir
+    suffix()           : .png 
     
 In general, some functions do not really require documentation 
 since their names are self explainatory.
