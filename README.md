@@ -3,7 +3,7 @@
 # Required modules from pip
 * pathlib
 * opencv-python
-
+* sphinx
 
 
 # simple example:
@@ -23,9 +23,14 @@
     stem().stem()      : image
     parent()           : /a/b/dir
     suffix()           : .png 
-    
-In general, some functions do not really require documentation 
-since their names are self explainatory.
+
+# How to build documentations
+At the project root directory :
+
+    cd docs
+    make html
+
+The entry file for documentation is docs/build/html/index.html
     
 # Future features
    support urls to manipulate downloadable files, images, etc
