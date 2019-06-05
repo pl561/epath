@@ -4,7 +4,8 @@
 __author__ = "Pascal Lefevre"
 __email__ = "plefevre561@gmail.com"
 
-"""This module contains tools for manipulating Linux paths.
+"""
+This module contains tools for manipulating Linux paths.
 EPath is the main class and proposes lots of features.
 
 In practice, it is possible to never manipulate the path string ever again. 
@@ -13,6 +14,12 @@ gives an easier and more convenient time for programming.
 
 The number of bugs is also greatly reduced : at least once in his life, 
 everyone has mistyped a file path 
+
+
+# Required modules
+    pathlib
+    opencv-python
+
 
 # simple example:
     import cv2
@@ -28,29 +35,25 @@ everyone has mistyped a file path
     example file path  : /a/b/dir/image.jpg.png
     basename()         : image.jpg.png
     stem()             : image.jpg
-    stem().stem()
+    stem().stem()      : image
     parent()           : /a/b/dir
     suffix()           : .png 
-    
-In general, some functions do not really require documentation 
-since their names are self explainatory.
-    
-# future features :
-   support urls to manipulate downloadable files, images, etc
 """
-
 
 import sys
 import os
 from shutil import copyfile
 import pathlib
 import cv2
+
+
 # import image
 
 def replace_dir(path_obj, newdir):
     """modify a pathlib.Path object parent"""
     name = os.path.join(newdir, path_obj.name)
     return name
+
 
 def replace_suffix(path_obj, suffix):
     """replaces last suffix of path
@@ -61,11 +64,13 @@ def replace_suffix(path_obj, suffix):
         basename = "".join([path_obj.stem, '.', suffix])
     return os.path.join(str(path_obj.parent), basename)
 
+
 def add_before_stem(path_obj, ssuffix):
     """add suffix (ssufix) before stem"""
     basename = "".join([ssuffix, path_obj.stem, path_obj.suffix])
     name = os.path.join(str(path_obj.parent), basename)
     return name
+
 
 def add_after_stem(path_obj, ssuffix):
     """add suffix (ssufix) after stem"""
@@ -75,20 +80,37 @@ def add_after_stem(path_obj, ssuffix):
 
 
 class EPath:
-    """Enhanced Path class with several useful features
-    behavior : uses functions, not attributes and returns EPath objects
+    """
+    Enhanced Path class with useful features for benchmarking and
+    automatized file name manipulations.
 
-    odd case : -- import pathtools as pt
-               -- ep = pt.EPath("/tmp/ttt/file.a.b.c")
-               -- ep.add_after_stem("extra_param_")
-               >> '/tmp/ttt/file.a.bextra_param_.c'
+    An EPath object never modifies its string value, but its methods
+    process and return a new EPath instance.
+
+    - Functions are public
+    - Methods are public and returns EPath objects
+
+
+
+    Attributes
+    ----------
+    path_str : str
+        the string representing the path
+    path_obj : pathlib.Path
+        the pathlib.Path object representing the path
+
+    Methods
+    -------
+    ...
+
 
     """
+
     def __init__(self, obj):
         """init function can take different objects such as :
            - str obj
            - pathlib.Path obj
-           - EPath obj itself"""
+           - EPath obj"""
         if isinstance(obj, str):
             if obj.endswith('/'):
                 self.path_str = obj[:-1]
@@ -212,10 +234,10 @@ class EPath:
         """add suffix (ssufix) before stem"""
         basename = "".join(
             [
-            ssuffix,
-            sep,
-            self.stem().string(),
-            self.suffix().string()
+                ssuffix,
+                sep,
+                self.stem().string(),
+                self.suffix().string()
             ])
         path = os.path.join(self.parent().string(), basename)
         return EPath(path) if obj else path
@@ -246,7 +268,6 @@ class EPath:
 
         return self.add_after_stem(ssuffix, obj=obj)
 
-
     def join(self, extrapath, obj=True):
         """receive a path and append it to the current path
         work similarly as the os.join function"""
@@ -269,8 +290,8 @@ class EPath:
            returns an EPath object"""
         print(extrapath)
         return self.join(EPath(extrapath))
-    __floordiv__ = __truediv__= __div__
 
+    __floordiv__ = __truediv__ = __div__
 
     def __getitem__(self, item):
         """parents and basename access in a list
@@ -279,7 +300,6 @@ class EPath:
         if self.path_str.startswith('/'):
             items[0] = '/'
         return EPath(items[item])
-
 
     def imread(self, **kwds):
         """reads an image using OpenCV"""
@@ -329,12 +349,10 @@ class EPath:
         else:
             raise ValueError("cannot copy, not a dir")
 
-
-
     def __str__(self):
         return "{}".format(self.path_str)
-    __repr__ = __str__
 
+    __repr__ = __str__
 
 
 def main():
