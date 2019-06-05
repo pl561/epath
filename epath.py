@@ -92,16 +92,11 @@ class EPath:
 
 
 
-    Attributes
-    ----------
+    :private attr:
     path_str : str
-        the string representing the path
+        string representing the path
     path_obj : pathlib.Path
-        the pathlib.Path object representing the path
-
-    Methods
-    -------
-    ...
+        pathlib.Path object representing the path
 
 
     """
@@ -129,12 +124,14 @@ class EPath:
 
     def parent(self):
         """
+        Returns the parent of path_str
+
         :attr:   path_str
         :return: parent path
         :rtype:  EPath
 
         :Example:
-        >>> path = Epath("/dirA/dirB/myfile.ext")
+        >>> path = EPath("/dirA/dirB/myfile.ext")
         >>> path.parent()
         /dirA/dirB
         >>> path.parent().parent()
@@ -155,12 +152,43 @@ class EPath:
         return EPath(self.path_obj.name)
 
     def suffix(self):
-        """:returns the suffix (or file extention)"""
+        """
+        A suffix, or file extension is a substring located after the last '.'
+        of the string path
+
+        :attr: path_obj
+        :rtype: EPath
+        :returns: the suffix (or file extention)
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1.ext2")
+        >>> path.suffix()
+        .ext2
+        >>> path.stem().suffix()
+        .ext1
+        >>> path.stem().stem().suffix().string()
+        ''
+
+        """
         return EPath(self.path_obj.suffix)
 
     def has_suffix(self):
-        """tests for suffix (or extension) existence"""
-        if len(self.path_obj.suffix) == 0:
+        """
+        tests if the attribute path_str has a suffix
+
+        :method: suffix
+        :rtype: bool
+        :returns: True if it has a suffix, else False
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.has_suffix()
+        True
+        >>> path = EPath("/dirA/dirB/myfile")
+        >>> path.has_suffix()
+        False
+        """
+        if len(self.suffix()) == 0:
             return False
         else:
             return True
@@ -223,9 +251,6 @@ class EPath:
                 return os.rmdir(self.path_str)
         else:
             raise ValueError("This is not a directory !")
-
-    def string(self):
-        return self.__str__()
 
     def replace_parents(self, new_parents, obj=True):
         """replaces all parents by np, if obj is True, returns an object"""
@@ -360,11 +385,21 @@ class EPath:
         else:
             raise ValueError("cannot copy, not a dir")
 
+    def __len__(self):
+        return len(self.path_str)
+
     def __str__(self):
         return "{}".format(self.path_str)
 
     __repr__ = __str__
 
+    def string(self):
+        """
+        :see:    method __str__
+        :rtype:  str
+        :return: string representation of the EPath object
+        """
+        return self.__str__()
 
 def main():
     pass
