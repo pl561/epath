@@ -142,9 +142,12 @@ class EPath:
     def stem(self):
         """
         stem is the path basename without the last extension
+
         :attr:   path_str
         :return: stem path
         :rtype:  EPath
+
+        :Example:
         >>> path = EPath("/dirA/dirB/myfile.ext1.ext2")
         >>> path.stem()
         myfile.ext1
