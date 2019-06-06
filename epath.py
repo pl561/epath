@@ -98,7 +98,7 @@ class EPath:
     path_obj : pathlib.Path
         pathlib.Path object representing the path
 
-
+    :methods:
     """
 
     def __init__(self, obj):
@@ -140,12 +140,24 @@ class EPath:
         return EPath(str(self.path_obj.parent))
 
     def stem(self):
-        """:returns the current path stem (basename without extension)"""
+        """
+        stem is the path basename without the last extension
+        :attr:   path_str
+        :return: stem path
+        :rtype:  EPath
+        >>> path = EPath("/dirA/dirB/myfile.ext1.ext2")
+        >>> path.stem()
+        myfile.ext1
+        >>> path.stem().stem()
+        myfile
+        >>> path.stem().stem().stem()
+        myfile
+        """
         return EPath(self.path_obj.stem)
 
-    def stem_noparam(self):
-        """:returns the current path stem without stem suffix"""
-        return EPath(self.stem().string().split('_')[0])
+    # def stem_noparam(self):
+    #     """:returns the current path stem without stem suffix"""
+    #     return EPath(self.stem().string().split('_')[0])
 
     def basename(self):
         """:returns the base file name of the current path"""
