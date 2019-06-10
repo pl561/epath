@@ -233,15 +233,15 @@ class EPath:
 
     def exists(self):
         """tests if path exists on the hdd"""
-        return self.path_obj.exists()
+        return os.path.exists(self.path_str)
 
     def is_dir(self):
         """tests if path is a directory"""
-        return self.path_obj.is_dir()
+        return os.path.isdir(self.path_str)
 
     def is_file(self):
         """tests if path is a file"""
-        return self.path_obj.is_file()
+        return os.path.isfile(self.path_str)
 
     def is_readable(self):
         """tests for read access"""
@@ -257,10 +257,10 @@ class EPath:
     def mkdir(self, raiseException=False):
         """silent mkdir"""
         if not self.exists():
-            self.path_obj.mkdir()
+            os.mkdir(self.path_str)
         else:
             if raiseException:
-                self.path_obj.mkdir()
+                os.mkdir(self.path_str)
 
     def touch(self):
         """creates a file at the current path but does
