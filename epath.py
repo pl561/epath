@@ -163,8 +163,24 @@ class EPath:
     #     return EPath(self.stem().string().split('_')[0])
 
     def basename(self):
-        """:returns the base file name of the current path"""
-        return EPath(self.path_obj.name)
+        """
+        basename is the path without the parent directory
+
+        :attr:   path_str
+        :return: basename path
+        :rtype:  EPath
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1.ext2")
+        >>> path.basename()
+        myfile.ext1.ext2
+        >>> path.basename().basename()
+        myfile.ext1.ext2
+        """
+
+
+
+        return EPath(os.path.basename(self.path_str))
 
     def suffix(self):
         """
