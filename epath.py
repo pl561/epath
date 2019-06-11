@@ -335,7 +335,18 @@ class EPath:
         return EPath(path) if obj else path
 
     def add_before_stem(self, ssuffix, sep='_', obj=True):
-        """add suffix (ssufix) before stem"""
+        """
+        add a stem suffix, i.e. some extra stem information before the extension
+
+        :attribute: path_str
+        :rtype: EPath
+        :returns: EPath object with an extra text before stem
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.add_before_stem("p1_p2_param3")
+        /dirA/dirB/p1_p2_param3_myfile.ext1
+        """
         basename = "".join(
             [
                 ssuffix,
@@ -347,13 +358,25 @@ class EPath:
         return EPath(path) if obj else path
 
     def add_after_stem(self, ssuffix, sep='_', obj=True):
-        """add suffix (ssufix) after stem"""
+        """
+        add a stem suffix, i.e. some extra stem information after the extension
+
+        :attribute: path_str
+        :rtype: EPath
+        :returns: EPath object with an extra text after stem
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.add_after_stem("p1_p2_param3")
+        /dirA/dirB/myfile_p1_p2_param3.ext1
+        """
         basename = "".join(
-            [self.stem().string(),
-             sep,
-             ssuffix,
-             self.suffix().string()
-             ])
+            [
+                self.stem().string(),
+                sep,
+                ssuffix,
+                self.suffix().string()
+            ])
         path = os.path.join(self.parent().string(), basename)
         return EPath(path) if obj else path
 
