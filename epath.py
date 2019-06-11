@@ -225,7 +225,19 @@ class EPath:
             return True
 
     def add_suffix(self, suffix):
-        """:returns a new EPath obj with a new suffix to the current path"""
+        """add an extra suffix to the current path
+
+        :attribute: path_str
+        :rtype: EPath
+        :returns: EPath object with an extra suffix
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.add_suffix("ext2")
+        /dirA/dirB/myfile.ext1.ext2
+        >>> path.add_suffix("ext2").add_suffix("ext3")
+        /dirA/dirB/myfile.ext1.ext2.ext3
+        """
         if suffix.startswith("."):
             suffix = suffix[1:]
         p = ".".join([self.path_str, suffix])
