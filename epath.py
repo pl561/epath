@@ -296,7 +296,18 @@ class EPath:
             raise ValueError("This is not a directory !")
 
     def replace_parents(self, new_parents, obj=True):
-        """replaces all parents by np, if obj is True, returns an object"""
+        """
+        replaces all parents by new_parents
+
+        :attribute: path_str
+        :rtype: EPath
+        :returns: EPath object with the new parents
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.replace_parents("dirC/dirB/c")
+        dirC/dirB/c/myfile.ext1
+        """
         path = os.path.join(str(new_parents), self.basename().string())
         return EPath(path) if obj else path
 
