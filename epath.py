@@ -380,20 +380,20 @@ class EPath:
         path = os.path.join(self.parent().string(), basename)
         return EPath(path) if obj else path
 
-    def add_param(self, psuffix, sep='_', obj=True):
-        """add parameters suffix after stem"""
-        # if dict then name params in psuffix
-        # else just put values
-        if isinstance(psuffix, dict):
-            keys = list(map(str, psuffix.keys()))
-            values = list(map(str, psuffix.values()))
-            ssuffix = "_".join("".join(item) for item in zip(keys, values))
-        elif isinstance(psuffix, list) or isinstance(psuffix, tuple):
-            ssuffix = "_".join(map(str, psuffix))
-        else:
-            raise ValueError("psuffix has not the right type")
-
-        return self.add_after_stem(ssuffix, obj=obj)
+    # def add_param(self, psuffix, sep='_', obj=True):
+    #     """add parameters suffix after stem"""
+    #     # if dict then name params in psuffix
+    #     # else just put values
+    #     if isinstance(psuffix, dict):
+    #         keys = list(map(str, psuffix.keys()))
+    #         values = list(map(str, psuffix.values()))
+    #         ssuffix = "_".join("".join(item) for item in zip(keys, values))
+    #     elif isinstance(psuffix, list) or isinstance(psuffix, tuple):
+    #         ssuffix = "_".join(map(str, psuffix))
+    #     else:
+    #         raise ValueError("psuffix has not the right type")
+    #
+    #     return self.add_after_stem(ssuffix, obj=obj)
 
     def join(self, extrapath, obj=True):
         """receive a path and append it to the current path
