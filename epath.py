@@ -301,7 +301,21 @@ class EPath:
         return EPath(path) if obj else path
 
     def replace_suffix(self, new_suffix, obj=True):
-        """replaces last suffix of path"""
+        """
+        replaces last suffix of path, if no suffix is found, it will add one
+
+        :attribute: path_str
+        :rtype: EPath
+        :returns: EPath object with a modified suffix or an extra one
+
+        :Example:
+        >>> path = EPath("/dirA/dirB/myfile.ext1")
+        >>> path.replace_suffix("ext2")
+        /dirA/dirB/myfile.ext2
+        >>> path = EPath("/dirA/dirB/myfile")
+        >>> path.replace_suffix("ext2")
+        /dirA/dirB/myfile.ext2
+        """
         if new_suffix.startswith('.'):
             basename = "".join([self.stem().string(), new_suffix])
         else:
