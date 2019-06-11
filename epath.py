@@ -47,36 +47,34 @@ import pathlib
 import cv2
 
 
-# import image
-
-def replace_dir(path_obj, newdir):
-    """modify a pathlib.Path object parent"""
-    name = os.path.join(newdir, path_obj.name)
-    return name
-
-
-def replace_suffix(path_obj, suffix):
-    """replaces last suffix of path
-    eg : image.jpg.png --> image.jpg.newsuffix"""
-    if suffix.startswith('.'):
-        basename = "".join([path_obj.stem, suffix])
-    else:
-        basename = "".join([path_obj.stem, '.', suffix])
-    return os.path.join(str(path_obj.parent), basename)
-
-
-def add_before_stem(path_obj, ssuffix):
-    """add suffix (ssufix) before stem"""
-    basename = "".join([ssuffix, path_obj.stem, path_obj.suffix])
-    name = os.path.join(str(path_obj.parent), basename)
-    return name
-
-
-def add_after_stem(path_obj, ssuffix):
-    """add suffix (ssufix) after stem"""
-    basename = "".join([path_obj.stem, ssuffix, path_obj.suffix])
-    name = os.path.join(str(path_obj.parent), basename)
-    return name
+# def replace_dir(path_obj, newdir):
+#     """modify a pathlib.Path object parent"""
+#     name = os.path.join(newdir, path_obj.name)
+#     return name
+#
+#
+# def replace_suffix(path_obj, suffix):
+#     """replaces last suffix of path
+#     eg : image.jpg.png --> image.jpg.newsuffix"""
+#     if suffix.startswith('.'):
+#         basename = "".join([path_obj.stem, suffix])
+#     else:
+#         basename = "".join([path_obj.stem, '.', suffix])
+#     return os.path.join(str(path_obj.parent), basename)
+#
+#
+# def add_before_stem(path_obj, ssuffix):
+#     """add suffix (ssufix) before stem"""
+#     basename = "".join([ssuffix, path_obj.stem, path_obj.suffix])
+#     name = os.path.join(str(path_obj.parent), basename)
+#     return name
+#
+#
+# def add_after_stem(path_obj, ssuffix):
+#     """add suffix (ssufix) after stem"""
+#     basename = "".join([path_obj.stem, ssuffix, path_obj.suffix])
+#     name = os.path.join(str(path_obj.parent), basename)
+#     return name
 
 
 class EPath:
