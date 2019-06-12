@@ -49,7 +49,11 @@ The entry file for documentation is docs/build/html/index.html
     ep = pt.EPath("/tmp/ttt/file.a.b.c")
     ep.add_after_stem("extra_param_")
     >> gives '/tmp/ttt/file.a.bextra_param_.c'
-
+    
+    compatibility issues with dots in paths
+    >> '/tmp/file_90.0.txt'
+    should we replace "." from floating values to "f" ?
+    in this case, .0 is not meant to be an extension
 
 
 
