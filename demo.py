@@ -56,6 +56,7 @@ def demo_basic():
 
 
 def demo_path_manipulations():
+    """demo to show how to use add_after/before_stem"""
     file_name = EPath("/tmp/my_file.txt")
 
     for i in range(10):
@@ -74,6 +75,74 @@ def demo_path_manipulations():
     # joining
     p_final3 = p_final.parent().join("../proc/omgdontsavehere")
     print(p_final3)
+
+
+def demo_experiment_tree_directories():
+    """
+    demo to show how efficient the EPath class can be
+    in the case of a benchmarking, saving files very easily
+    without too much code
+
+    - readability is very good, especially without reading the docs
+    - no raw path string manipulation
+    - hence, very little chance to mess up path names
+    - a delight, a simplicity to manipulate
+
+    :See: EPath class
+
+
+    :Examples:
+    >>> root_dir = EPath(HOME).join("root_dir")
+    >>> data_dir = root_dir.join("data")
+    >>> images_dir = root_dir.join("images")
+    >>> article_dir = root_dir.join("article")
+    >>> exp_dir = root_dir.join("experiments")
+    >>> csv_dir = data_dir.join("csv")
+    >>> tex_dir = data_dir.join("tex")
+    >>> csv_fname = csv_dir.join("preciousresults.csv")
+    >>> tex_fname = csv_fname.replace_parents(tex_dir).replace_suffix(".tex")
+
+    >>> print(root_dir)
+    /tmp/root_dir
+    >>> print(data_dir)
+    /tmp/root_dir/data
+    >>> print(images_dir)
+    /tmp/root_dir/images
+    >>> print(article_dir)
+    /tmp/root_dir/article
+    >>> print(exp_dir)
+    /tmp/root_dir/experiments
+    >>> print(csv_fname)
+    /tmp/root_dir/data/csv/preciousresults.csv
+    >>> print(tex_fname)
+    /tmp/root_dir/data/tex/preciousresults.tex
+    """
+    root_dir = EPath("/tmp").join("root_dir")
+    # root_dir.mkdir()
+    data_dir = root_dir.join("data")
+    # data_dir.mkdir()
+    images_dir = root_dir.join("images")
+    # images_dir.mkdir()
+    article_dir = root_dir.join("article")
+    # article_dir.mkdir()
+    exp_dir = root_dir.join("experiments")
+    # exp_dir.mkdir()
+
+    csv_dir = data_dir.join("csv")
+    tex_dir = data_dir.join("tex")
+    csv_fname = csv_dir.join("preciousresults.csv")
+
+    # sometimes, we have to do this, and it's complicated
+    # with EPath, it's much simpler
+    tex_fname = csv_fname.replace_parents(tex_dir).replace_suffix(".tex")
+
+    print(root_dir)
+    print(data_dir)
+    print(images_dir)
+    print(article_dir)
+    print(exp_dir)
+    print(csv_fname)
+    print(tex_fname)
 
 
 def demo_experimental_feature_setitem():
@@ -97,7 +166,7 @@ def demo_experimental_feature_setitem():
     # print(npath[1:3])
 
 def main():
-    demo_path_manipulations()
+    demo_experiment_tree_directories()
 
 
 if __name__ == '__main__':
