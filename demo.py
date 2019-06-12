@@ -93,6 +93,7 @@ def demo_experiment_tree_directories():
 
     :Examples:
     >>> root_dir = EPath(HOME).join("root_dir")
+    >>> # root_dir.mkdir() to create the directory
     >>> data_dir = root_dir.join("data")
     >>> images_dir = root_dir.join("images")
     >>> article_dir = root_dir.join("article")
@@ -116,6 +117,9 @@ def demo_experiment_tree_directories():
     /tmp/root_dir/data/csv/preciousresults.csv
     >>> print(tex_fname)
     /tmp/root_dir/data/tex/preciousresults.tex
+
+
+
     """
     root_dir = EPath("/tmp").join("root_dir")
     # root_dir.mkdir()

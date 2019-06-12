@@ -1,6 +1,6 @@
 # A enhanced path module to improve workflow efficiency and avoid bugs when coding benchmarks
 
-# Required modules from pip
+# Required modules from pip (Python 2.7)
 * pathlib
 * opencv-python
 * sphinx
@@ -40,7 +40,8 @@ The entry file for documentation is docs/build/html/index.html
 # TODO
 * Write module documentation
 * Remove pathlib.Path ?
-* write unit tests
+* continue to write docstring for doctest
+* develop experimental features such as ``__setitem__``
 * choose a licence
    
 # Bugs, others, implementation choices
