@@ -134,8 +134,10 @@ class EPath:
         /dirA/dirB
         >>> path.parent().parent()
         /dirA
+        >>> isinstance(path.parent().parent(), EPath)
+        True
         """
-        return EPath(str(self.path_obj.parent))
+        return EPath(self.path_obj.parent)
 
     def stem(self):
         """
@@ -175,9 +177,6 @@ class EPath:
         >>> path.basename().basename()
         myfile.ext1.ext2
         """
-
-
-
         return EPath(os.path.basename(self.path_str))
 
     def suffix(self):
@@ -293,7 +292,7 @@ class EPath:
         else:
             raise ValueError("This is not a directory !")
 
-    def replace_parents(self, new_parents, obj=True):
+    def replace_parents(self, new_parents):
         """
         replaces all parents by new_parents
 
@@ -307,9 +306,9 @@ class EPath:
         dirC/dirB/c/myfile.ext1
         """
         path = os.path.join(str(new_parents), self.basename().string())
-        return EPath(path) if obj else path
+        return EPath(path)
 
-    def replace_suffix(self, new_suffix, obj=True):
+    def replace_suffix(self, new_suffix):
         """
         replaces last suffix of path, if no suffix is found, it will add one
 
@@ -330,9 +329,9 @@ class EPath:
         else:
             basename = "".join([self.stem().string(), '.', new_suffix])
         path = os.path.join(self.parent().string(), basename)
-        return EPath(path) if obj else path
+        return EPath(path)
 
-    def add_before_stem(self, ssuffix, sep='_', obj=True):
+    def add_before_stem(self, ssuffix, sep='_'):
         """
         add a stem suffix, i.e. some extra stem information before the extension
 
@@ -353,9 +352,9 @@ class EPath:
                 self.suffix().string()
             ])
         path = os.path.join(self.parent().string(), basename)
-        return EPath(path) if obj else path
+        return EPath(path)
 
-    def add_after_stem(self, ssuffix, sep='_', obj=True):
+    def add_after_stem(self, ssuffix, sep='_'):
         """
         add a stem suffix, i.e. some extra stem information after the extension
 
@@ -376,7 +375,7 @@ class EPath:
                 self.suffix().string()
             ])
         path = os.path.join(self.parent().string(), basename)
-        return EPath(path) if obj else path
+        return EPath(path)
 
     # def add_param(self, psuffix, sep='_', obj=True):
     #     """add parameters suffix after stem"""
@@ -393,15 +392,14 @@ class EPath:
     #
     #     return self.add_after_stem(ssuffix, obj=obj)
 
-    def join(self, extrapath, obj=True):
+    def join(self, extrapath):
         """receive a path and append it to the current path
         work similarly as the os.join function"""
         if isinstance(extrapath, list) or isinstance(extrapath, tuple):
             r = os.path.join(self.path_str, *extrapath)
         else:
             r = os.path.join(self.path_str, str(extrapath))
-        assert obj in [True, False]
-        return EPath(r) if obj else str(r)
+        return EPath(r)
 
     def __add__(self, extrasuffix):
         """concatenate extrasuffix with path_str stem
