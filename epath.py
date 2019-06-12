@@ -40,7 +40,7 @@ everyone has mistyped a file path
     suffix()           : .png 
 """
 
-import sys
+
 import os
 from shutil import copyfile
 import pathlib
@@ -487,10 +487,3 @@ class EPath:
         :return: string representation of the EPath object
         """
         return self.__str__()
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    sys.exit(main())
