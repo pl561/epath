@@ -30,7 +30,7 @@ At the project root directory :
     cd docs
     make html
 
-The entry file for documentation is docs/build/html/index.html
+The **entry file** for documentation is docs/build/html/index.html
     
 # Future features
    support urls to manipulate downloadable files, images, etc
@@ -54,7 +54,8 @@ The entry file for documentation is docs/build/html/index.html
     >> '/tmp/file_90.0.txt'
     should we replace "." from floating values to "f" ?
     in this case, .0 is not meant to be an extension
-
+    
+* convention : use "." only for extensions/suffixes
 
 
 

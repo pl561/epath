@@ -6,14 +6,14 @@ __email__ = "plefevre561@gmail.com"
 
 """
 This module contains tools for manipulating Linux paths.
-EPath is the main class and proposes lots of features.
+EPath is the main class and proposes several features.
 
-In practice, it is possible to never manipulate the path string ever again. 
+In practice, it is possible to not manipulating. 
 From the first line of codes to a highly developped project, this module 
-gives an easier and more convenient time for programming. 
+gives an easier and more convenient time for programming when dealing with
+Linux paths.
 
-The number of bugs is also greatly reduced : at least once in his life, 
-everyone has mistyped a file path 
+When developing, the number of bugs is also greatly reduced 
 
 
 # Required modules
@@ -83,7 +83,8 @@ class EPath:
     automatized file name manipulations.
 
     An EPath object never modifies its string value, but its methods
-    process and return a new EPath instance.
+    process and return a new EPath instance, i.e. path_str remains constant
+    for an object instance
 
     - Functions are public
     - Methods are public and returns EPath objects
