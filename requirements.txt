@@ -1,0 +1,4 @@
+pathlib
+opencv-python
+pandas
+sphinx
