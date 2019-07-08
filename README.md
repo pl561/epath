@@ -10,6 +10,11 @@ EPath is a module made to improve workflow efficiency and avoid bugs when dealin
     pip install sphinx
 
 
+## Installation of EPath module via pip
+
+    pip install git+https://github.com/pl561/epath.git
+
+
 ## simple example:
     import cv2
     from epath import EPath
