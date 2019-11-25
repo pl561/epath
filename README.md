@@ -12,7 +12,7 @@ EPath is a module made to improve workflow efficiency and avoid bugs when dealin
 
 ## Installation of EPath module via pip
 
-    pip install git+https://github.com/pl561/epath.git
+    pip install -e git+https://github.com/pl561/epath.git#egg=epath
 
 
 ## simple example:
