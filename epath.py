@@ -488,3 +488,7 @@ class EPath:
         :return: string representation of the EPath object
         """
         return self.__str__()
+    
+    @property
+    def s(self):
+        return self.__str__()
