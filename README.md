@@ -3,6 +3,14 @@
 ## Description
 EPath is a module made to improve workflow efficiency and avoid bugs when dealing with multiple file paths.
 
+## Future update
+The EPath class will be updated with pathlib module for Python 3.
+Some benefits: 
+* Path OS like object support
+* some functions are already implementedint pathlib
+* new features coming
+* some methods will be equiped with @property
+
 ## Installation or required packages via pip (Python 2.7)
     pip install pathlib
     pip install opencv-python
