@@ -42,6 +42,7 @@ When developing, the number of bugs is also greatly reduced
 
 
 import os
+import glob
 from shutil import copyfile
 import pathlib
 import cv2
@@ -424,6 +425,14 @@ class EPath:
         if self.path_str.startswith('/'):
             items[0] = '/'
         return EPath(items[item])
+
+    def glob(self, pattern):
+        """
+        return a list of EPath file names that have been globbed
+        """
+        p = self.join(pattern)
+        globbed = glob.glob(str(p))
+        return [EPath(f) for f in globbed]
 
     def imread(self, **kwds):
         """reads an image using OpenCV"""
