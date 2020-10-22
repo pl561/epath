@@ -101,7 +101,7 @@ class EPath:
     :methods:
     """
 
-    def __init__(self, obj):
+    def __init__(self, obj, mkdir=False):
         """init function can take different objects such as :
            - str obj
            - pathlib.Path obj
@@ -121,6 +121,9 @@ class EPath:
         else:
             raise ValueError("not a str, not a pathlib.Path obj, "
                              "not a EPath !")
+
+        if mkdir:
+            self.mkdir()
 
     def parent(self):
         """
