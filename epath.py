@@ -125,6 +125,7 @@ class EPath:
         if mkdir:
             self.mkdir()
 
+    @property
     def parent(self):
         """
         Returns the parent of path_str
@@ -144,6 +145,7 @@ class EPath:
         """
         return EPath(self.path_obj.parent)
 
+    @property
     def stem(self):
         """
         stem is the path basename without the last extension
@@ -167,6 +169,7 @@ class EPath:
     #     """:returns the current path stem without stem suffix"""
     #     return EPath(self.stem().string().split('_')[0])
 
+    @property
     def basename(self):
         """
         basename is the path without the parent directory
@@ -184,6 +187,7 @@ class EPath:
         """
         return EPath(os.path.basename(self.path_str))
 
+    @property
     def suffix(self):
         """
         A suffix, or file extension is a substring located after the last '.'
