@@ -272,6 +272,9 @@ class EPath:
     def is_executable(self):
         return os.access(self.path_str, os.X_OK)
 
+    def file_size(self):
+        return self.path_obj.stat().st_size
+    
     def mkdir(self, raiseException=False):
         """silent mkdir"""
         if not self.exists():
