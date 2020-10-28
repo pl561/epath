@@ -272,6 +272,7 @@ class EPath:
     def is_executable(self):
         return os.access(self.path_str, os.X_OK)
 
+    @property
     def file_size(self):
         return self.path_obj.stat().st_size
     
