@@ -364,7 +364,7 @@ class EPath:
                 self.stem.s,
                 self.suffix.s
             ])
-        path = os.path.join(self.parent().string(), basename)
+        path = os.path.join(self.parent.s, basename)
         return EPath(path)
 
     def add_after_stem(self, ssuffix, sep='_'):
