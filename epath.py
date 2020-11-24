@@ -318,7 +318,7 @@ class EPath:
         >>> path.replace_parents("dirC/dirB/c")
         dirC/dirB/c/myfile.ext1
         """
-        path = os.path.join(str(new_parents), self.basename().string())
+        path = os.path.join(str(new_parents), self.basename.s)
         return EPath(path)
 
     def replace_suffix(self, new_suffix):
@@ -338,10 +338,10 @@ class EPath:
         /dirA/dirB/myfile.ext2
         """
         if new_suffix.startswith('.'):
-            basename = "".join([self.stem().string(), new_suffix])
+            basename = "".join([self.stem.s, new_suffix])
         else:
-            basename = "".join([self.stem().string(), '.', new_suffix])
-        path = os.path.join(self.parent().string(), basename)
+            basename = "".join([self.stem.s, '.', new_suffix])
+        path = os.path.join(self.parent.s, basename)
         return EPath(path)
 
     def add_before_stem(self, ssuffix, sep='_'):
@@ -361,8 +361,8 @@ class EPath:
             [
                 ssuffix,
                 sep,
-                self.stem().string(),
-                self.suffix().string()
+                self.stem.s,
+                self.suffix.s
             ])
         path = os.path.join(self.parent().string(), basename)
         return EPath(path)
@@ -382,12 +382,12 @@ class EPath:
         """
         basename = "".join(
             [
-                self.stem().string(),
+                self.stem.s,
                 sep,
                 ssuffix,
-                self.suffix().string()
+                self.suffix.s
             ])
-        path = os.path.join(self.parent().string(), basename)
+        path = os.path.join(self.parent.s, basename)
         return EPath(path)
 
     # def add_param(self, psuffix, sep='_', obj=True):
@@ -445,15 +445,15 @@ class EPath:
         globbed = glob.glob(str(p))
         return [EPath(f) for f in globbed]
 
-    def imread(self, **kwds):
-        """reads an image using OpenCV"""
-        return cv2.imread(self.path_str, **kwds)
+#     def imread(self, **kwds):
+#         """reads an image using OpenCV"""
+#         return cv2.imread(self.path_str, **kwds)
 
-    def imwrite(self, img):
-        """write an image (numpy array) using OpenCV"""
-        r = cv2.imwrite(self.path_str, img)
-        msg = "Could not write img at {}".format(self.path_str)
-        assert self.exists(), msg
+#     def imwrite(self, img):
+#         """write an image (numpy array) using OpenCV"""
+#         r = cv2.imwrite(self.path_str, img)
+#         msg = "Could not write img at {}".format(self.path_str)
+#         assert self.exists(), msg
 
     def write(self, content, mode=""):
         """write content to the current path"""
